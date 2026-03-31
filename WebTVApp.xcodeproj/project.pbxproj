@@ -88,7 +88,7 @@
 		00C80EA41D555696003C0788 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1100;
 				TargetAttributes = {
 					00C80EA51D555696003C0788 = {
 						CreatedOnToolsVersion = 12.4;
@@ -96,7 +96,7 @@
 				};
 			};
 			buildConfigurationList = 00C80EB21D555696003C0788 /* Build configuration list for PBXProject "WebTVApp" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
