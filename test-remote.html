@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebTV Remote Test</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 { text-align: center; margin-top: 50px; }
+        #log {
+            background: #000;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .log-entry { margin: 5px 0; }
+        .log-entry.up { color: #4caf50; }
+        .log-entry.down { color: #f44336; }
+        .log-entry.select { color: #2196f3; }
+        .log-entry.menu { color: #ff9800; }
+    </style>
+</head>
+<body>
+    <h1>WebTV Remote Test</h1>
+    <div id="log"></div>
+    
+    <script>
+        // Initialize the Apple TV Remote bridge
+        window._atvRemoteCb = null;
+        
+        window.appleTVRemote = {
+            onButton: function(callback) {
+                window._atvRemoteCb = callback;
+            }
+        };
+        
+        // Log received buttons
+        var log = document.getElementById('log');
+        
+        function addLog(btn, type) {
+            var entry = document.createElement('div');
+            entry.className = 'log-entry ' + btn;
+            entry.textContent = '[' + type + '] ' + btn;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        // Listen for button events
+        if (window.appleTVRemote && window.appleTVRemote.onButton) {
+            window.appleTVRemote.onButton(function(btn) {
+                console.log('Remote button:', btn);
+                addLog(btn, 'PRESS');
+            });
+        }
+        
+        // Also test the raw callback
+        window._atvRemoteCb = function(btn) {
+            console.log('Raw callback:', btn);
+        };
+        
+        addLog('ready', 'SYSTEM');
+    </script>
+</body>
+</html>
